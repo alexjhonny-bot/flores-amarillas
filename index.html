@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Flores amarillas 🌻</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;width:100%;height:100%;overflow:hidden}
+body{background:linear-gradient(180deg,#fffdf5 0%,#fff0a0 100%);font-family:Georgia,serif;color:#60470a}
+#start{position:absolute;opacity:0;width:1px;height:1px}
+.scene{position:relative;width:100%;height:100%;overflow:hidden}
+.intro{position:absolute;z-index:30;left:50%;top:50%;transform:translate(-50%,-50%);width:86%;max-width:560px;padding:30px 22px;text-align:center;background:#fff;border-radius:28px;box-shadow:0 12px 38px rgba(90,65,0,.18);transition:opacity .8s,transform .8s}
+.intro h1{font-size:clamp(30px,8vw,52px);line-height:1.05;margin:0 0 18px}
+.intro p{font:17px/1.45 Arial,sans-serif;margin:0 0 24px;color:#765d27}
+.btn{display:inline-block;padding:17px 27px;border-radius:50px;background:#f0bf00;color:#fff;font:bold 18px Arial,sans-serif;box-shadow:0 8px 20px rgba(130,95,0,.25);cursor:pointer}
+#start:checked~.scene .intro{opacity:0;transform:translate(-50%,-50%) scale(.92);pointer-events:none}
+
+.garden{position:absolute;inset:0;pointer-events:none}
+.stem{position:absolute;left:50%;bottom:-10px;width:14px;height:0;transform:translateX(-50%);background:#347f39;border-radius:20px;transition:height 2s ease}
+.branch{position:absolute;height:8px;width:0;background:#347f39;border-radius:10px;transform-origin:left center}
+.b1{left:50%;bottom:155px;transform:rotate(-30deg)}.b2{left:50%;bottom:230px;transform:rotate(29deg)}
+.b3{left:50%;bottom:305px;transform:rotate(-25deg)}.b4{left:50%;bottom:380px;transform:rotate(22deg)}
+.b5{left:50%;bottom:430px;transform:rotate(-17deg)}.b6{left:50%;bottom:475px;transform:rotate(18deg)}
+.leaf{position:absolute;width:100px;height:38px;background:#49933e;border-radius:100% 0 100% 0;opacity:0}
+.l1{left:calc(50% - 100px);bottom:180px;transform:rotate(-5deg)}.l2{left:calc(50% + 30px);bottom:245px;transform:scaleX(-1) rotate(-5deg)}
+.l3{left:calc(50% - 100px);bottom:320px;transform:rotate(-5deg)}.l4{left:calc(50% + 30px);bottom:395px;transform:scaleX(-1) rotate(-5deg)}
+.l5{left:calc(50% - 92px);bottom:445px;transform:rotate(-5deg)}.l6{left:calc(50% + 30px);bottom:485px;transform:scaleX(-1) rotate(-5deg)}
+
+.flower{position:absolute;width:112px;height:112px;opacity:0;transform:scale(.05)}
+.flower .petal{position:absolute;left:40px;top:0;width:30px;height:55px;background:#ffd21b;border-radius:50%;transform-origin:15px 59px}
+.p1{transform:rotate(0)}.p2{transform:rotate(45deg)}.p3{transform:rotate(90deg)}.p4{transform:rotate(135deg)}
+.p5{transform:rotate(180deg)}.p6{transform:rotate(225deg)}.p7{transform:rotate(270deg)}.p8{transform:rotate(315deg)}
+.center{position:absolute;left:32px;top:32px;width:48px;height:48px;background:#70440d;border:5px solid #9b661b;border-radius:50%}
+
+.f1{left:calc(50% - 155px);bottom:355px}.f2{left:calc(50% + 48px);bottom:290px}
+.f3{left:calc(50% - 145px);bottom:235px}.f4{left:calc(50% + 55px);bottom:185px}
+.f5{left:calc(50% - 120px);bottom:430px}.f6{left:calc(50% + 15px);bottom:395px}
+.f7{left:calc(50% - 55px);bottom:485px}
+
+#start:checked~.scene .stem{height:500px}
+#start:checked~.scene .b1{width:145px;transition:width .8s 1.0s}
+#start:checked~.scene .b2{width:140px;transition:width .8s 1.35s}
+#start:checked~.scene .b3{width:135px;transition:width .8s 1.7s}
+#start:checked~.scene .b4{width:130px;transition:width .8s 2.05s}
+#start:checked~.scene .b5{width:120px;transition:width .8s 2.4s}
+#start:checked~.scene .b6{width:110px;transition:width .8s 2.75s}
+
+#start:checked~.scene .l1{animation:leaf .7s 1.25s forwards}#start:checked~.scene .l2{animation:leaf .7s 1.6s forwards}
+#start:checked~.scene .l3{animation:leaf .7s 1.95s forwards}#start:checked~.scene .l4{animation:leaf .7s 2.3s forwards}
+#start:checked~.scene .l5{animation:leaf .7s 2.65s forwards}#start:checked~.scene .l6{animation:leaf .7s 3s forwards}
+
+#start:checked~.scene .f1{animation:bloom .9s 1.7s cubic-bezier(.2,1.5,.4,1) forwards}
+#start:checked~.scene .f2{animation:bloom .9s 2.05s cubic-bezier(.2,1.5,.4,1) forwards}
+#start:checked~.scene .f3{animation:bloom .9s 2.4s cubic-bezier(.2,1.5,.4,1) forwards}
+#start:checked~.scene .f4{animation:bloom .9s 2.75s cubic-bezier(.2,1.5,.4,1) forwards}
+#start:checked~.scene .f5{animation:bloom .9s 3.1s cubic-bezier(.2,1.5,.4,1) forwards}
+#start:checked~.scene .f6{animation:bloom .9s 3.45s cubic-bezier(.2,1.5,.4,1) forwards}
+#start:checked~.scene .f7{animation:bloom .9s 3.8s cubic-bezier(.2,1.5,.4,1) forwards}
+
+@keyframes leaf{0%{opacity:0;transform:scale(.1)}100%{opacity:1}}
+@keyframes bloom{0%{opacity:0;transform:scale(.05) rotate(-15deg)}70%{opacity:1;transform:scale(1.12) rotate(4deg)}100%{opacity:1;transform:scale(1) rotate(0)}}
+
+.final{position:absolute;z-index:20;left:50%;top:8%;width:94%;text-align:center;opacity:0;transform:translate(-50%,-15px);transition:opacity 1s 4.7s,transform 1s 4.7s}
+#start:checked~.scene .final{opacity:1;transform:translate(-50%,0)}
+.final strong{font-size:clamp(24px,7vw,42px);text-shadow:0 2px 12px #fff}
+.final span{display:block;margin-top:8px;font:15px Arial;color:#765d27}
+@media(max-height:700px){
+ .stem{transform:translateX(-50%) scaleY(.8);transform-origin:bottom}
+ .f1{bottom:320px}.f2{bottom:260px}.f3{bottom:210px}.f4{bottom:165px}.f5{bottom:380px}.f6{bottom:350px}.f7{bottom:425px}
+ .b1{bottom:140px}.b2{bottom:205px}.b3{bottom:270px}.b4{bottom:330px}.b5{bottom:375px}.b6{bottom:415px}
+ .l1{bottom:160px}.l2{bottom:220px}.l3{bottom:285px}.l4{bottom:345px}.l5{bottom:390px}.l6{bottom:430px}
+}
+</style>
+</head>
+<body>
+<input id="start" type="checkbox">
+<div class="scene">
+<div class="intro">
+<h1>🌼 Flores<br>amarillas 🌼</h1>
+<p>Toca el botón y mira cómo una pequeña rama empieza a llenarse de girasoles.</p>
+<label class="btn" for="start">🌱 Hacer brotar los girasoles</label>
+</div>
+
+<div class="garden">
+<div class="stem"></div>
+<div class="branch b1"></div><div class="branch b2"></div><div class="branch b3"></div>
+<div class="branch b4"></div><div class="branch b5"></div><div class="branch b6"></div>
+<div class="leaf l1"></div><div class="leaf l2"></div><div class="leaf l3"></div>
+<div class="leaf l4"></div><div class="leaf l5"></div><div class="leaf l6"></div>
+
+<div class="flower f1">
+<i class="petal p1"></i><i class="petal p2"></i><i class="petal p3"></i><i class="petal p4"></i>
+<i class="petal p5"></i><i class="petal p6"></i><i class="petal p7"></i><i class="petal p8"></i>
+<i class="center"></i></div><div class="flower f2">
+<i class="petal p1"></i><i class="petal p2"></i><i class="petal p3"></i><i class="petal p4"></i>
+<i class="petal p5"></i><i class="petal p6"></i><i class="petal p7"></i><i class="petal p8"></i>
+<i class="center"></i></div><div class="flower f3">
+<i class="petal p1"></i><i class="petal p2"></i><i class="petal p3"></i><i class="petal p4"></i>
+<i class="petal p5"></i><i class="petal p6"></i><i class="petal p7"></i><i class="petal p8"></i>
+<i class="center"></i></div><div class="flower f4">
+<i class="petal p1"></i><i class="petal p2"></i><i class="petal p3"></i><i class="petal p4"></i>
+<i class="petal p5"></i><i class="petal p6"></i><i class="petal p7"></i><i class="petal p8"></i>
+<i class="center"></i></div><div class="flower f5">
+<i class="petal p1"></i><i class="petal p2"></i><i class="petal p3"></i><i class="petal p4"></i>
+<i class="petal p5"></i><i class="petal p6"></i><i class="petal p7"></i><i class="petal p8"></i>
+<i class="center"></i></div><div class="flower f6">
+<i class="petal p1"></i><i class="petal p2"></i><i class="petal p3"></i><i class="petal p4"></i>
+<i class="petal p5"></i><i class="petal p6"></i><i class="petal p7"></i><i class="petal p8"></i>
+<i class="center"></i></div><div class="flower f7">
+<i class="petal p1"></i><i class="petal p2"></i><i class="petal p3"></i><i class="petal p4"></i>
+<i class="petal p5"></i><i class="petal p6"></i><i class="petal p7"></i><i class="petal p8"></i>
+<i class="center"></i></div>
+</div>
+<div class="final"><strong>💛 ¡Feliz Día de las Flores Amarillas! 🌻</strong><span>Un pequeño detalle para alguien especial.</span></div>
+</div>
+</body>
+</html>

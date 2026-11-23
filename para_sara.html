@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#fff8f4">
+<title>Para Sara 🌹</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; min-height: 100%; }
+  body {
+    min-height: 100vh; overflow: hidden; display: grid; place-items: center;
+    font-family: Georgia, "Times New Roman", serif; color: #6e2938;
+    background: radial-gradient(circle at 50% 42%, #fff 0, #fff8f4 48%, #f8e5e4 100%);
+  }
+  .scene { position: relative; width: 100%; min-height: 100vh; display: grid; place-items: center; padding: 24px; isolation: isolate; }
+  .glow { position: absolute; width: min(85vw, 620px); aspect-ratio: 1; border-radius: 50%; background: #f6d9d6; filter: blur(70px); opacity: .55; z-index: -1; }
+  .intro { position: absolute; top: 8%; text-align: center; width: 90%; color: #9b5962; letter-spacing: .12em; text-transform: uppercase; font: 12px/1.6 Arial, sans-serif; opacity: 0; animation: fadeIn 1s .3s forwards; }
+  .flower-field { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+  .flower { position: absolute; left: 50%; top: 50%; font-size: clamp(28px, 6vw, 58px); opacity: 0; transform: translate(-50%,-50%) scale(.2) rotate(0deg); animation: burst 2.3s cubic-bezier(.15,.75,.2,1) forwards; filter: drop-shadow(0 5px 5px #8a455522); }
+  @keyframes burst {
+    0% { opacity: 0; transform: translate(-50%,-50%) scale(.15) rotate(-35deg); }
+    14% { opacity: 1; }
+    75% { opacity: 1; }
+    100% { opacity: 0; transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))) scale(1.08) rotate(var(--r)); }
+  }
+  .letter-wrap { width: min(88vw, 430px); position: relative; z-index: 2; opacity: 0; transform: translateY(22px) scale(.92); animation: arrive 1s 2.7s forwards; }
+  @keyframes arrive { to { opacity: 1; transform: translateY(0) scale(1); } }
+  .envelope {
+    width: 100%; min-height: 245px; position: relative; border: 1px solid #e9c7c5; border-radius: 8px;
+    background: linear-gradient(145deg,#fffdfb,#f7e5e1); box-shadow: 0 22px 55px #8a455522;
+    display: grid; place-items: center; cursor: pointer; transition: transform .3s, box-shadow .3s;
+    padding: 26px; -webkit-tap-highlight-color: transparent;
+  }
+  .envelope:hover { transform: translateY(-5px); box-shadow: 0 28px 60px #8a455533; }
+  .envelope:before, .envelope:after { content:""; position:absolute; inset:0; border-radius:8px; pointer-events:none; }
+  .envelope:before { background: linear-gradient(135deg, transparent 49.7%, #e9c9c4 50%, transparent 50.5%), linear-gradient(225deg, transparent 49.7%, #e9c9c4 50%, transparent 50.5%); opacity:.7; }
+  .seal { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 46px; height: 46px; border-radius: 50%; background: #a93c4b; color: #fff4ec; display:grid; place-items:center; font-size:23px; box-shadow:0 4px 12px #8b263344; transition: opacity .35s, transform .35s; }
+  .tap { position: relative; z-index: 1; margin-top: 112px; color:#8d4853; font: 700 13px Arial,sans-serif; letter-spacing:.22em; text-transform:uppercase; }
+  .hint { position: absolute; bottom: -35px; width:100%; text-align:center; color:#a8797d; font: 11px Arial,sans-serif; letter-spacing:.08em; }
+  .card {
+    display:none; width:100%; min-height:320px; padding:42px 28px 34px; text-align:center; position:relative;
+    background:linear-gradient(155deg,#fffefc,#fff4ef); border:1px solid #efd4cd; border-radius:8px;
+    box-shadow:0 22px 55px #8a455522; animation: cardOpen .8s cubic-bezier(.2,.8,.2,1) both;
+  }
+  @keyframes cardOpen { from { opacity:0; transform:rotateX(-18deg) scale(.9); } to { opacity:1; transform:rotateX(0) scale(1); } }
+  .card:before { content:""; position:absolute; inset:12px; border:1px solid #eed8d1; border-radius:4px; pointer-events:none; }
+  .card .mini { font-size:30px; margin-bottom:18px; }
+  .card .bouquet { font-size: clamp(58px, 15vw, 82px); line-height:1.1; filter: drop-shadow(0 7px 8px #9b596233); margin-bottom:20px; }
+  .card h1 { font-size:clamp(28px,7vw,39px); line-height:1.2; font-weight:normal; margin:0 0 16px; color:#9e3548; }
+  .card p { font-size:16px; line-height:1.7; margin:0; color:#80545a; }
+  .card .signature { margin-top:25px; font-style:italic; color:#a45d65; font-size:15px; }
+  .opened .envelope { display:none; } .opened .card { display:block; }
+  .music { position:absolute; width:1px; height:1px; opacity:0; pointer-events:none; }
+  .music-help { position:absolute; z-index:4; bottom:48px; left:50%; transform:translateX(-50%); border:1px solid #e6c5c3; border-radius:24px; padding:10px 16px; background:#fffaf7; color:#8d4853; font:11px Arial,sans-serif; letter-spacing:.08em; cursor:pointer; box-shadow:0 5px 18px #8a45551c; }
+  .music-help[hidden] { display:none; }
+  .footer { position:absolute; bottom:18px; color:#b58c8c; font:10px Arial,sans-serif; letter-spacing:.12em; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration:.01ms !important; animation-delay:0ms !important; transition:none !important; } }
+</style>
+</head>
+<body>
+<main class="scene">
+  <div class="glow"></div>
+  <div class="intro">Un pequeño jardín florece para ti</div>
+  <div class="flower-field" id="flowers" aria-hidden="true"></div>
+  <iframe class="music" id="music" title="Música de cumpleaños" src="https://www.youtube-nocookie.com/embed/ycl9-59mfJ0?start=137&autoplay=1&playsinline=1&rel=0&enablejsapi=1" allow="autoplay; encrypted-media; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+  <button class="music-help" id="musicHelp" type="button" hidden>♫ Activar música</button>
+  <section class="letter-wrap" id="letter">
+    <button class="envelope" id="openLetter" type="button" aria-label="Abrir la carta">
+      <span class="seal">♥</span>
+      <span class="tap">Tocar</span>
+    </button>
+    <article class="card">
+      <div class="mini bouquet" aria-label="Ramo de rosas blancas, rojas y girasoles">💐</div>
+      <h1>¡Feliz cumpleaños,<br>mi querida Sara!</h1>
+      <p>Hoy es un día especial, y quiero desearte de todo corazón un cumpleaños lleno de alegría, sonrisas y momentos bonitos.<br><br>
+      Que la vida te regale muchísimas razones para ser feliz, que cada uno de tus sueños encuentre su camino y que nunca te falten personas que te quieran, te valoren y te recuerden lo maravillosa que eres.<br><br>
+      Deseo que esta nueva vuelta al sol venga cargada de oportunidades, aventuras, tranquilidad y cosas hermosas. Que nunca pierdas esa luz que te hace especial y que hoy recibas un poquito de toda la felicidad que mereces.<br><br>
+      Disfruta muchísimo tu día, sonríe, celebra y recuerda que hay alguien que te desea lo mejor de corazón.</p>
+      <div class="signature">Te quiero mucho ❤️</div>
+    </article>
+    <div class="hint" id="hint">Toca la carta para descubrir tu mensaje</div>
+  </section>
+  <div class="footer">HECHO CON CARIÑO</div>
+</main>
+<script>
+  const field = document.getElementById('flowers');
+  const flowers = ['🌹','🤍','🌻','🌹','🌼','🌹','🌻','🤍','🌷','🌻','🌹','🌼','🤍','🌻','🌹','🌷','🌻','🤍','🌹','🌼','🌻','🌹','🤍','🌻'];
+  flowers.forEach((flower, i) => {
+    const el = document.createElement('span');
+    el.className = 'flower';
+    el.textContent = flower;
+    const angle = (Math.PI * 2 * i / flowers.length) + (Math.random() - .5) * .35;
+    const distance = 110 + Math.random() * Math.min(innerWidth * .34, 260);
+    el.style.setProperty('--x', `${Math.cos(angle) * distance}px`);
+    el.style.setProperty('--y', `${Math.sin(angle) * distance}px`);
+    el.style.setProperty('--r', `${Math.round(Math.random() * 100 - 50)}deg`);
+    el.style.animationDelay = `${Math.random() * .28}s`;
+    field.appendChild(el);
+  });
+  const musicFrame = document.getElementById('music');
+  const musicHelp = document.getElementById('musicHelp');
+  // Autoplay is attempted on page load. If the browser blocks it, offer a one-tap fallback.
+  const musicTimer = setTimeout(() => { musicHelp.hidden = false; }, 1800);
+  musicHelp.addEventListener('click', () => {
+    musicFrame.src = 'https://www.youtube-nocookie.com/embed/ycl9-59mfJ0?start=137&autoplay=1&playsinline=1&rel=0';
+    musicHelp.textContent = '♫ Música activada';
+    musicHelp.disabled = true;
+  });
+  document.getElementById('openLetter').addEventListener('click', () => {
+    document.getElementById('letter').classList.add('opened');
+    document.getElementById('hint').style.display = 'none';
+    // Tapping the letter also counts as a user gesture and retries playback if needed.
+    if (!musicHelp.hidden && !musicHelp.disabled) musicHelp.click();
+  });
+</script>
+</body>
+</html>
